@@ -5,8 +5,8 @@ import (
 	"go-server-example/pkg/database"
 )
 
-// CreateUser 创建用户
-func CreateUser(username, password string) error {
+// SaveUser 创建用户
+func SaveUser(username, password string) error {
 	user := &models.User{
 		Username: username,
 		Password: password,

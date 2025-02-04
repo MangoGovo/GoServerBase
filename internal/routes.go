@@ -7,5 +7,6 @@ import (
 
 // Init 初始化路由
 func Init(r *gin.Engine) {
-	r.POST("/user", userController.CreateUser)
+	r.POST("/register", userController.Register)
+	r.POST("/login", userController.Login)
 }
