@@ -2,8 +2,8 @@ package midwares
 
 import (
 	"errors"
-	"go-server-example/internal/apiException"
-	"go-server-example/internal/utils"
+	"go-server-example/internal/exceptions"
+	"go-server-example/internal/utils/response"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -21,18 +21,18 @@ func ErrHandler() gin.HandlerFunc {
 		if len(c.Errors) > 0 {
 			err := c.Errors.Last().Err
 			if err != nil {
-				var apiErr *apiException.Error
+				var apiErr *exceptions.Error
 
-				// 尝试将错误转换为 apiException
+				// 尝试将错误转换为 exceptions
 				ok := errors.As(err, &apiErr)
 
 				// 如果转换失败，则使用 ServerError
 				if !ok {
-					apiErr = apiException.ServerError
+					apiErr = exceptions.ServerError
 					zap.L().Error("遇到了未知的异常:", zap.Error(err))
 				}
 
-				utils.JsonErrorResponse(c, apiErr.Code, apiErr.Msg)
+				response.JsonError(c, apiErr.Code, apiErr.Msg)
 				return
 			}
 		}
@@ -41,11 +41,11 @@ func ErrHandler() gin.HandlerFunc {
 
 // HandleNotFound 处理 404 错误。
 func HandleNotFound(c *gin.Context) {
-	err := apiException.NotFound
+	err := exceptions.NotFound
 	// 记录 404 错误日志
 	zap.L().Warn("404 Not Found",
 		zap.String("path", c.Request.URL.Path),
 		zap.String("method", c.Request.Method),
 	)
-	utils.JsonResponse(c, http.StatusNotFound, err.Code, err.Msg, nil)
+	response.Json(c, http.StatusNotFound, err.Code, err.Msg, nil)
 }

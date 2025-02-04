@@ -2,9 +2,9 @@ package userController
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-server-example/internal/apiException"
+	"go-server-example/internal/exceptions"
 	"go-server-example/internal/services/userService"
-	"go-server-example/internal/utils"
+	"go-server-example/internal/utils/response"
 	"go.uber.org/zap"
 )
 
@@ -16,13 +16,13 @@ type createUserReq struct {
 func CreateUser(c *gin.Context) {
 	var data createUserReq
 	if err := c.ShouldBindJSON(&data); err != nil {
-		utils.AbortWithException(c, apiException.ParamsError, err)
+		response.AbortWithException(c, exceptions.ParamsError, err)
 	}
 
 	err := userService.CreateUser(data.Username, data.Password)
 	if err != nil {
-		utils.AbortWithException(c, apiException.ServerError, err)
+		response.AbortWithException(c, exceptions.ServerError, err)
 	}
 	zap.L().Info("用户创建成功")
-	utils.JsonSuccessResponse(c, nil)
+	response.JsonSuccess(c, nil)
 }

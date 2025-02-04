@@ -18,9 +18,6 @@ type redisConfig struct {
 // GlobalClient 全局 Redis 客户端实例
 var GlobalClient *redis.Client
 
-// InfoConfig 保存 Redis 配置信息
-var InfoConfig redisConfig
-
 // init 函数用于初始化 Redis 客户端和配置信息
 func init() {
 	info := redisConfig{
@@ -35,7 +32,6 @@ func init() {
 		Password: info.Password,
 		DB:       info.DB,
 	})
-	InfoConfig = info
 
 	zap.L().Info("Redis初始化成功")
 }

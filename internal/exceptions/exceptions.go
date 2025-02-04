@@ -1,4 +1,4 @@
-package apiException
+package exceptions
 
 import (
 	"go-server-example/pkg/log"
