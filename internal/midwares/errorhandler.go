@@ -2,11 +2,11 @@ package midwares
 
 import (
 	"errors"
-	"go-server-example/internal/exceptions"
-	"go-server-example/internal/utils/response"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"go-server-example/internal/exceptions"
+	"go-server-example/internal/utils/response"
 	"go.uber.org/zap"
 )
 

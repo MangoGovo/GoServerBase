@@ -1,8 +1,9 @@
 package exceptions
 
 import (
-	"go-server-example/pkg/log"
 	"net/http"
+
+	"go-server-example/pkg/log"
 )
 
 // Error 表示自定义错误，包括状态码、消息和日志级别。

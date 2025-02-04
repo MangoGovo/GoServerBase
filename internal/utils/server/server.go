@@ -3,13 +3,13 @@ package server
 import (
 	"context"
 	"errors"
-	"go-server-example/pkg/redis"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
+	"go-server-example/pkg/redis"
 	"go.uber.org/zap"
 )
 

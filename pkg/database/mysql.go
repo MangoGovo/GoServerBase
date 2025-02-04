@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+
 	"go-server-example/pkg/config"
 	_ "go-server-example/pkg/log"
 	"go.uber.org/zap"

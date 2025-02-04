@@ -1,12 +1,12 @@
 package response
 
 import (
-	"go-server-example/internal/exceptions"
-	"go-server-example/pkg/log"
-	"go.uber.org/zap"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"go-server-example/internal/exceptions"
+	"go-server-example/pkg/log"
+	"go.uber.org/zap"
 )
 
 // Json 返回json格式数据
