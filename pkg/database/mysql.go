@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"go-server-example/pkg/config"
-	_ "go-server-example/pkg/log"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

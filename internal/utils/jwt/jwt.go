@@ -1,14 +1,15 @@
 package jwt
 
 import (
+	"time"
+
 	"github.com/golang-jwt/jwt/v5"
 	"go-server-example/internal/exceptions"
 	"go-server-example/pkg/config"
-
 	"go.uber.org/zap"
-	"time"
 )
 
+// UserClaims 自定义用户Claims
 type UserClaims struct {
 	UserID uint `json:"user_id"`
 	jwt.RegisteredClaims
@@ -22,6 +23,7 @@ func init() {
 	expireHour = config.Config.GetInt("jwt.expireHour")
 }
 
+// GenerateJWT 生成JWT密钥
 func GenerateJWT(userID uint) (string, error) {
 	claims := UserClaims{
 		userID,
@@ -37,8 +39,9 @@ func GenerateJWT(userID uint) (string, error) {
 	return s, err
 }
 
+// ParseJwt 解析JWT密钥
 func ParseJwt(tokenString string) (*UserClaims, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &UserClaims{}, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &UserClaims{}, func(_ *jwt.Token) (any, error) {
 		return []byte(secretKey), nil
 	})
 	if err != nil {
@@ -47,7 +50,6 @@ func ParseJwt(tokenString string) (*UserClaims, error) {
 	}
 	if userClaims, ok := token.Claims.(*UserClaims); ok && token.Valid {
 		return userClaims, nil
-	} else {
-		return nil, exceptions.ServerError
 	}
+	return nil, exceptions.ServerError
 }
