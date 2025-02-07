@@ -3,6 +3,7 @@ package userController
 import (
 	"errors"
 	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"go-server-example/internal/exceptions"
 	"go-server-example/internal/services/userService"
@@ -16,6 +17,7 @@ type registerReq struct {
 	Password string `json:"password" binding:"required"`
 }
 
+// Register 注册
 func Register(c *gin.Context) {
 	var data registerReq
 	if err := c.ShouldBindJSON(&data); err != nil {

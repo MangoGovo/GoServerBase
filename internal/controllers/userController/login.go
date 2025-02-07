@@ -2,6 +2,7 @@ package userController
 
 import (
 	"errors"
+
 	"github.com/gin-gonic/gin"
 	"go-server-example/internal/exceptions"
 	"go-server-example/internal/services/userService"
@@ -20,6 +21,7 @@ type loginResp struct {
 	Token string `json:"token"`
 }
 
+// Login 用户登录
 func Login(c *gin.Context) {
 	var data loginReq
 	var resp loginResp

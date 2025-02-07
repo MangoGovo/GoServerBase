@@ -3,7 +3,6 @@ package redis
 import (
 	"github.com/go-redis/redis/v8"
 	"go-server-example/pkg/config"
-	_ "go-server-example/pkg/log"
 	"go.uber.org/zap"
 )
 
